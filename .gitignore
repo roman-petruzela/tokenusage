@@ -5,3 +5,4 @@
 /packaging/aur/pkg/
 /packaging/aur/*.tar.gz
 .env
+.serena/
