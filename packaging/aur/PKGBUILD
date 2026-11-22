@@ -1,0 +1,36 @@
+# Maintainer: roman-petruzela
+pkgname=tokenusage
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Claude Pro/Max usage tracker: TUI and JSON output for Waybar/Quickshell'
+arch=(x86_64 aarch64)
+url="https://github.com/roman-petruzela/tokenusage"
+license=(MIT)
+depends=(glibc)
+makedepends=(go)
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP') # replaced with the real sum after the v$pkgver release exists
+
+build() {
+  cd "$pkgname-$pkgver"
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+  go build -ldflags "-linkmode=external -X main.version=$pkgver" -o "$pkgname" ./cmd/tokenusage
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+  go test ./...
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  install -Dm755 "$pkgname" "$pkgdir/usr/bin/$pkgname"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -d "$pkgdir/usr/share/$pkgname"
+  cp -r contrib "$pkgdir/usr/share/$pkgname/contrib"
+  install -Dm644 contrib/systemd/tokenusage-refresh.service contrib/systemd/tokenusage-refresh.timer -t "$pkgdir/usr/lib/systemd/user/"
+}
