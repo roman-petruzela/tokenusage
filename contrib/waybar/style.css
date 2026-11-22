@@ -1,0 +1,4 @@
+#custom-claude.ok    { color: #a6e3a1; }
+#custom-claude.warn  { color: #f9e2af; }
+#custom-claude.crit  { color: #f38ba8; font-weight: bold; }
+#custom-claude.error { color: #6c7086; }

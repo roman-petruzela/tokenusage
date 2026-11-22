@@ -1,0 +1,8 @@
+// Add "custom/claude" to modules-left/center/right, then merge this block.
+"custom/claude": {
+  "exec": "tokenusage waybar --cached",
+  "return-type": "json",
+  "interval": 30,
+  "format": "󰧑 {}",
+  "on-click": "kitty -e tokenusage tui"
+}

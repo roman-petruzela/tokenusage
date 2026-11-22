@@ -1,0 +1,8 @@
+[Unit]
+Description=Refresh tokenusage cache (Claude subscription usage)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tokenusage refresh
+# Exit 2 (auth expired) and 3 (network) are expected transient states, not unit failures.
+SuccessExitStatus=2 3
