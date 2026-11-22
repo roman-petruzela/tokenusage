@@ -9,6 +9,6 @@ pkgbase = tokenusage
 	makedepends = go
 	depends = glibc
 	source = tokenusage-0.1.0.tar.gz::https://github.com/roman-petruzela/tokenusage/archive/refs/tags/v0.1.0.tar.gz
-	sha256sums = SKIP
+	sha256sums = 64579959cd9b3e9c0f2062e3bde38afe5a714897d0fd96c7310389922fb98b78
 
 pkgname = tokenusage
